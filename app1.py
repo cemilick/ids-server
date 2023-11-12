@@ -2,9 +2,6 @@ import pandas as pd
 from flask import Flask, request, jsonify, render_template
 import pickle
 import pymysql.cursors
-# from scapy.all import *
-
-from scapy.all import *
 
 # Initialize Flask app
 app = Flask(__name__)
@@ -62,7 +59,7 @@ def get_intrusions():
                                      cursorclass=pymysql.cursors.DictCursor)
         
         with connection.cursor() as cursor:
-            sql = "SELECT * FROM `intrusion_data` WHERE `prediction` = 1"
+            sql = "SELECT * FROM `intrusion_data`"
             cursor.execute(sql)
             intrusions = cursor.fetchall()
 
@@ -104,4 +101,3 @@ def clearData():
 
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=5000, debug=True)
-
