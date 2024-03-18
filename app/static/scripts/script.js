@@ -91,12 +91,12 @@ const updateIntrusionTable = () => {
         'Anomali',
     ]
     $.ajax({
-        url: '/getIntrusions',
+        url: '/getIntrusions?limit=10',
         type: 'GET',
         success: function (response) {
             $('#datatablesSimple tbody').empty();
             response.intrusions.forEach(function (intrusion, index) {
-                const badgePrediction = intrusion.detection == 1 ? 'danger' : 'success'
+                const badgePrediction = intrusion.prediction == 1 ? 'danger' : 'success'
                 const badgeDuration = intrusion.duration > 10 ? 'danger' : 'success'
                 const badgePacket = intrusion.pkt_len > 500 ? 'danger' : 'success'
                 $('#datatablesSimple tbody').append(
@@ -104,7 +104,8 @@ const updateIntrusionTable = () => {
                     '</td><td>' + intrusion.ip_address +
                     '</td><td><span class="btn btn-' + badgeDuration + '">' + (intrusion.duration * 100).toFixed(4) +
                     ' ms</span></td><td><span class="btn btn-' + badgePacket + '">' + intrusion.pkt_len +
-                    '</span></td><td><span class="btn btn-' + badgePrediction + '">' + prediction[intrusion.prediction] +
+                    '</span></td><td>' + intrusion.protocol +
+                    '</td><td><span class="btn btn-' + badgePrediction + '">' + prediction[intrusion.prediction] +
                     '</span></td><td>' + formatTimeStamp(intrusion.timestamp) +
                     '</td></tr>');
             });
@@ -113,6 +114,21 @@ const updateIntrusionTable = () => {
             console.log("An error occurred while fetching intrusion data.");
         }
     });
+
+    $.ajax({
+        url: '/getIntrusions?lastAnomali=true',
+        type: 'GET',
+        success: function (response) {
+            const data = response.intrusions?.[0];
+            $('#anomali-title').html(data.ip_address)
+            $('#anomali-len').html(data.pkt_len)
+            $('#anomali-duration').html((data.duration * 100).toFixed(4))
+            $('#anomali-time').html(formatTimeStamp(data.timestamp))
+        },
+        error: function (error) {
+            console.log({ message: "an error occured while fetching data", error })
+        }
+    })
 }
 
 const clearData = () =>

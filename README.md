@@ -2,6 +2,7 @@
 - Kode utama berada di folder app -> app-fix.py
 - Kode dijalankan pada OS Linux Server dengan command python3 (VirtualBox 6.1 dan Python 3.10.12)
 - Menggunakan dataset NSL KDD Dataset yang diperoleh dari Kaggle
+    - Bisa menggunakan dataset di folder nsl-kdd
 
 ## How to Install?
 ### Install library python yang dibutuhkan

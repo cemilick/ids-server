@@ -21,9 +21,10 @@
         <h2>Anomali Terakhir Terdeteksi</h2>
         <center>
             <blockquote class="blockquote text-center card p-2" style="max-width: fit-content;">
-                <h3>192.168.1.15</h3>
+                <h3 id="anomali-title">-</h3>
                 <p class="text-sm-center text-secondary">
-                    Packet Length : 1000 | Duration : 1200 | Timestamp : Sun, 12 Apr 2024
+                    Packet Length : <span id="anomali-len">-</span> | Duration : <span id="anomali-duration">-</span> |
+                    Timestamp : <span id="anomali-time">-</span>
                 </p>
             </blockquote>
         </center>
@@ -39,8 +40,9 @@
                     <th scope="col">IP Address</th>
                     <th scope="col">Duration</th>
                     <th scope="col">Packet Length</th>
+                    <th scope="col">Protocol Name</th>
                     <th scope="col">Prediction</th>
-                    <th scope="col">Timestamp</th>
+                    <th scope="col">Timestamps</th>
                 </tr>
             </thead>
             <tbody>
