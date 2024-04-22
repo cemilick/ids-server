@@ -97,13 +97,12 @@ const updateIntrusionTable = () => {
             $('#datatablesSimple tbody').empty();
             response.intrusions.forEach(function (intrusion, index) {
                 const badgePrediction = intrusion.prediction == 1 ? 'danger' : 'success'
-                const badgeDuration = intrusion.duration > 10 ? 'danger' : 'success'
-                const badgePacket = intrusion.pkt_len > 500 ? 'danger' : 'success'
+                const badgePacket = intrusion.pkt_len > 1500 ? 'danger' : 'success'
                 $('#datatablesSimple tbody').append(
                     '<tr><th scope="row">' + (index + 1) +
                     '</td><td>' + intrusion.ip_address +
-                    '</td><td><span class="btn btn-' + badgeDuration + '">' + (intrusion.duration * 100).toFixed(4) +
-                    ' ms</span></td><td><span class="btn btn-' + badgePacket + '">' + intrusion.pkt_len +
+                    '</td><td>' + (intrusion.duration * 100).toFixed(4) +
+                    ' ms</td><td><span class="btn btn-' + badgePacket + '">' + intrusion.pkt_len +
                     '</span></td><td>' + intrusion.protocol +
                     '</td><td><span class="btn btn-' + badgePrediction + '">' + prediction[intrusion.prediction] +
                     '</span></td><td>' + formatTimeStamp(intrusion.timestamp) +
